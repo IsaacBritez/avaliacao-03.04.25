@@ -1,0 +1,6 @@
+Back-end
+
+Criar uma aplicação usando express
+Deve ter um recurso de aluno = como vai lidar com os HTTP verbs
+Deve ter possuir endpoints no padrão desenvolvido em sala de aula, usando swagger, persistindo em banco de dados sqlite
+Deve possuir rota de um crud
