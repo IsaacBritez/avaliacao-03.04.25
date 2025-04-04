@@ -11,7 +11,7 @@ const Aluno = require('./models/aluno-models'); // Importar o modelo de usuário
 
 // Middlewares
 const middlewares = require('./middlewares');
-const CriarUsuarioController = require('./controllers/criar-usuario');
+const CriarAlunooController = require('./controllers/criar-usuario');
 
 // Cria o servidor express
 const app = express();

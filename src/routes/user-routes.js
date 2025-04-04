@@ -1,74 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user-model');
-const routeAdapter = require('../adapters/express-route-adapter');
+const Aluno = require('../models/aluno-models');
+const routeAdapter = require('../adapters/route-adapters');
 const CriarAlunoController = require('../controllers/criar-usuario');
 const ListarAlunoController = require('../controllers/listar-usuario');
 const EditarAlunoController = require('../controllers/editar-usuario');
 const DeletarAlunoController = require('../controllers/deletar-usuario');
-const adaptRoute = require('../adapters/express-route-adapter');
+const adaptRoute = require('../adapters/route-adapters');
 
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     User:
+ *     Aluno:
  *       type: object
  *       required:
  *         - nome
- *         - senha
- *         - email
+ *         - idade
  *       properties:
  *         nome:
  *           type: string
  *           description: O nome de usuário
- *         senha:
+ *         idade:
  *           type: string
- *           description: A senha do usuário
- *         email:
- *           type: string
- *           description: O email do usuário
+ *           description: A idade do usuário
  *       example:
  *         id: 1
  *         nome: João da Silva
- *         senha: 123abc
- *         email: joao.silva@dominio.com
+ *         idade: 14
  */
 
 /**
  * @swagger
  * tags:
- *   name: Users
+ *   name: Alunos
  *   description: Gerenciamento de usuários API
  */
 
 /**
  * @swagger
- * /api/users:
+ * /api/alunos:
  *   post:
  *     summary: Cria um novo usuário
- *     tags: [Users]
+ *     tags: [Alunos]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Aluno'
  *     responses:
  *       201:
  *         description: O usuário foi criado com sucesso!
  *       500:
  *         description: Algum erro aconteceu
  */
-router.post('/users', routeAdapter(new CriarAlunoController()));
+router.post('/alunos', routeAdapter(new CriarAlunoController()));
 
 /**
  * @swagger
- * /api/users:
+ * /api/alunos:
  *   get:
  *     summary: Retorna a lista de usuários
- *     tags: [Users]
+ *     tags: [Alunos]
  *     responses:
  *       200:
  *         description: A lista de usuários foi retornada com sucesso
@@ -77,29 +72,29 @@ router.post('/users', routeAdapter(new CriarAlunoController()));
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/User'
+ *                 $ref: '#/components/schemas/Aluno'
  */
-router.get('/users', routeAdapter(new ListarAlunoController()));
+router.get('/alunos', routeAdapter(new ListarAlunoController()));
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/alunos/{id}:
  *   put:
  *     summary: Atualiza o usuário por id
- *     tags: [Users]
+ *     tags: [Alunos]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
- *         description: The user id
+ *         description: ID do aluno 
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Aluno'
  *     responses:
  *       200:
  *         description: O usuário foi atualizado com sucesso
@@ -108,14 +103,14 @@ router.get('/users', routeAdapter(new ListarAlunoController()));
  *       500:
  *         description: Algum erro aconteceu
  */
-router.put('/users/:id', adaptRoute(new EditarAlunoController()));
+router.put('/alunos/:id', adaptRoute(new EditarAlunoController()));
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/alunos/{id}:
  *   delete:
  *     summary: Remove o usuário por id
- *     tags: [Users]
+ *     tags: [Alunos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -131,6 +126,6 @@ router.put('/users/:id', adaptRoute(new EditarAlunoController()));
  *       500:
  *         description: Algum erro aconteceu
  */
-router.delete('/users/:id', adaptRoute(new DeletarAlunoController()));
+router.delete('/alunos/:id', adaptRoute(new DeletarAlunoController()));
 
 module.exports = router;
